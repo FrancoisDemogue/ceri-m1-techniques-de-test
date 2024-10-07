@@ -1,17 +1,29 @@
 version: 2.1
+
+# Définition du job de build
 jobs:
   build:
     docker:
-      - image: cimg/base:2021.04
+      - image: circleci/openjdk:8-jdk  # Utilisation de Java 8, peut être remplacé par 11 ou 17 si besoin
     steps:
-      - checkout
+      - checkout  # Récupère le code source
+      
       - run:
-          name: The First Step
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+          name: Configurer Maven
+          command: mvn -B -f pom.xml clean install  # Nettoie le projet et installe les dépendances Maven
+      
       - run:
-          name: The Second Step
-          command: |
-            ls -al
-            echo '^^^The files in your repo^^^'
+          name: Lancer les tests unitaires
+          command: mvn test  # Exécute les tests unitaires avec Maven
+
+# Définition du workflow
+workflows:
+  version: 2
+  build_master:
+    jobs:
+      - build
+    # Le workflow est exécuté uniquement sur la branche master
+    filters:
+      branches:
+        only:
+          - master
