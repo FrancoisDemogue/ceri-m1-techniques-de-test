@@ -13,27 +13,27 @@ import static org.junit.Assert.assertEquals;
 public class IPokedexTest {
 
     private IPokedex pokedex;
-    private Pokemon bulbasaur;
-    private Pokemon charmander;
+    private Pokemon Bulbizarre;
+    private Pokemon Aquali;
 
     @Before
     public void setup () throws PokedexException {
         pokedex = Mockito.mock(IPokedex.class);
 
-        bulbasaur = new Pokemon(1, "Bulbasaur", 613, 64, 4000, 4, 126, 126, 90, 56.0);
-        charmander = new Pokemon(4, "Charmander", 700, 55, 5000, 5, 130, 110, 85, 60.0);
+        Bulbizarre = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56.0);
+        Aquali = new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 100.0);
 
 
         List<Pokemon> pokemon_list = new ArrayList<>();
-        pokemon_list.add(bulbasaur);
-        pokemon_list.add(charmander);
+        pokemon_list.add(Bulbizarre);
+        pokemon_list.add(Aquali);
 
         // MOCKs des méthodes
         Mockito.when(pokedex.size()).thenReturn(pokemon_list.size());
-        Mockito.when(pokedex.addPokemon(bulbasaur)).thenReturn(0);
-        Mockito.when(pokedex.addPokemon(charmander)).thenReturn(1);
-        Mockito.when(pokedex.getPokemon(0)).thenReturn(bulbasaur);
-        Mockito.when(pokedex.getPokemon(1)).thenReturn(charmander);
+        Mockito.when(pokedex.addPokemon(Bulbizarre)).thenReturn(0);
+        Mockito.when(pokedex.addPokemon(Aquali)).thenReturn(133);
+        Mockito.when(pokedex.getPokemon(0)).thenReturn(Bulbizarre);
+        Mockito.when(pokedex.getPokemon(133)).thenReturn(Aquali);
         Mockito.when(pokedex.getPokemons()).thenReturn(pokemon_list);
     }
 
@@ -44,19 +44,19 @@ public class IPokedexTest {
 
     @Test
     public void testAddPokemon() {
-        assertEquals(0, pokedex.addPokemon(bulbasaur));
-        assertEquals(1, pokedex.addPokemon(charmander));
+        assertEquals(0, pokedex.addPokemon(Bulbizarre));
+        assertEquals(133, pokedex.addPokemon(Aquali));
     }
 
     @Test
     public void testGetPokemon() throws PokedexException {
         Pokemon recup = pokedex.getPokemon(0);
-        assertEquals("Bulbasaur", recup.getName());
+        assertEquals("Bulbizarre", recup.getName());
         assertEquals(613, recup.getCp());
 
-        recup = pokedex.getPokemon(1);
-        assertEquals("Charmander", recup.getName());
-        assertEquals(700, recup.getCp());
+        recup = pokedex.getPokemon(133);
+        assertEquals("Aquali", recup.getName());
+        assertEquals(2729, recup.getCp());
     }
 
     @Test
@@ -64,7 +64,7 @@ public class IPokedexTest {
         Comparator<Pokemon> cpComparator = Comparator.comparingInt(Pokemon::getCp);
         List<Pokemon> recup = pokedex.getPokemons();
         assertEquals(2, recup.size());
-        assertEquals("bulbasaur", recup.get(0).getName());
-        assertEquals("Charmander", recup.get(1).getName());
+        assertEquals("Bulbizarre", recup.get(0).getName());
+        assertEquals("Aquali", recup.get(133).getName());
     }
 }

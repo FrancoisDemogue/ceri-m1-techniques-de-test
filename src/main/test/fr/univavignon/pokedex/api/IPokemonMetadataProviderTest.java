@@ -11,16 +11,16 @@ public class IPokemonMetadataProviderTest {
 
     public void setUp() throws PokedexException {
         pokemonMetadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
-        Mockito.when(pokemonMetadataProvider.getPokemonMetadata(1)).thenReturn(new PokemonMetadata(1, "Bulbasaur", 126, 126, 90));
+        Mockito.when(pokemonMetadataProvider.getPokemonMetadata(0)).thenReturn(new PokemonMetadata(0, "Bulbizarre", 126, 126, 90));
         Mockito.when(pokemonMetadataProvider.getPokemonMetadata(-1)).thenThrow(new PokedexException("Invalid index"));
     }
 
     @Test
     public void testGetPokemonMetadata() throws PokedexException {
-        PokemonMetadata metadata = pokemonMetadataProvider.getPokemonMetadata(1);
+        PokemonMetadata metadata = pokemonMetadataProvider.getPokemonMetadata(0);
 
-        assertEquals(1, metadata.getIndex());
-        assertEquals("Bulbasaur", metadata.getName());
+        assertEquals(0, metadata.getIndex());
+        assertEquals("Bulbizarre", metadata.getName());
         assertEquals(126, metadata.getAttack());
         assertEquals(126, metadata.getDefense());
         assertEquals(90, metadata.getStamina());

@@ -19,38 +19,38 @@ public class IPokemonFactoryTest {
     @Before
     public void setUp() {
         pokemonFactory = Mockito.mock(IPokemonFactory.class);
-        Mockito.when(pokemonFactory.createPokemon(1, 613, 64, 4000, 4)).thenReturn(new Pokemon(1, "Bulbasaur", 613, 64, 4000, 4, 126, 126, 90, 56.0));
-        Mockito.when(pokemonFactory.createPokemon(4, 700, 55, 5000, 5)).thenReturn(new Pokemon(4, "Charmander", 700, 55, 5000, 5, 130, 110, 85, 60.0));
+        Mockito.when(pokemonFactory.createPokemon(0, 613, 64, 4000, 4)).thenReturn(new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56.0));
+        Mockito.when(pokemonFactory.createPokemon(133, 2729, 202, 5000, 4)).thenReturn(new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 100.0));
     }
 
     @Test
     public void testCreatePokemon() {
-        Pokemon bulbasaur = pokemonFactory.createPokemon(1, 613, 64, 4000, 4);
-        assertEquals(1, bulbasaur.getIndex());
-        assertEquals("Bulbasaur", bulbasaur.getName());
-        assertEquals(613, bulbasaur.getCp());
-        assertEquals(64, bulbasaur.getHp());
-        assertEquals(4000, bulbasaur.getDust());
-        assertEquals(4, bulbasaur.getCandy());
-        assertEquals(126, bulbasaur.getAttack());
-        assertEquals(126, bulbasaur.getDefense());
-        assertEquals(90, bulbasaur.getStamina());
-        assertEquals(56.0, bulbasaur.getIv(), 0.01);
+        Pokemon bulbizarre = pokemonFactory.createPokemon(0, 613, 64, 4000, 4);
+        assertEquals(0, bulbizarre.getIndex());
+        assertEquals("Bulbizarre", bulbizarre.getName());
+        assertEquals(613, bulbizarre.getCp());
+        assertEquals(64, bulbizarre.getHp());
+        assertEquals(4000, bulbizarre.getDust());
+        assertEquals(4, bulbizarre.getCandy());
+        assertEquals(126, bulbizarre.getAttack());
+        assertEquals(126, bulbizarre.getDefense());
+        assertEquals(90, bulbizarre.getStamina());
+        assertEquals(56.0, bulbizarre.getIv(), 0.01);
     }
 
     @Test
     public void testCreateAutrePokemon() {
-        Pokemon charmander = pokemonFactory.createPokemon(4, 700, 55, 5000, 5);
-        assertEquals(4, charmander.getIndex());
-        assertEquals("Charmander", charmander.getName());
-        assertEquals(700, charmander.getCp());
-        assertEquals(55, charmander.getHp());
-        assertEquals(5000, charmander.getDust());
-        assertEquals(5, charmander.getCandy());
-        assertEquals(130, charmander.getAttack());
-        assertEquals(110, charmander.getDefense());
-        assertEquals(85, charmander.getStamina());
-        assertEquals(60.0, charmander.getIv(), 0.01);
+        Pokemon aquali = pokemonFactory.createPokemon(133, 2729, 202, 5000, 4);
+        assertEquals(133, aquali.getIndex());
+        assertEquals("Aquali", aquali.getName());
+        assertEquals(2729, aquali.getCp());
+        assertEquals(202, aquali.getHp());
+        assertEquals(4000, aquali.getDust());
+        assertEquals(4, aquali.getCandy());
+        assertEquals(186, aquali.getAttack());
+        assertEquals(168, aquali.getDefense());
+        assertEquals(260, aquali.getStamina());
+        assertEquals(100.0, aquali.getIv(), 0.01);
     }
 
 }
