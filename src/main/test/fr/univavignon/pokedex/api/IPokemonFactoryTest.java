@@ -1,9 +1,5 @@
 package fr.univavignon.pokedex.api;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -43,7 +39,7 @@ public class IPokemonFactoryTest {
     }
 
     @Test
-    public void testCreateAnotherPokemon() {
+    public void testCreateAutrePokemon() {
         Pokemon charmander = pokemonFactory.createPokemon(4, 700, 55, 5000, 5);
         assertEquals(4, charmander.getIndex());
         assertEquals("Charmander", charmander.getName());
