@@ -19,31 +19,34 @@ public class IPokedexTest {
     private IPokedex pokedex;
     private Pokemon pokemon1;
     private Pokemon pokemon2;
+    private ArrayList<Pokemon> liste = new ArrayList<>();
+
 
     @Before
     public void setup () throws PokedexException, IOException {
         pokedex = Mockito.mock(IPokedex.class);
-
 
         // recuperer la liste des pokemons dans un fichier avec un before each
         FileReader fileReader = new FileReader("pokemon_151");
         BufferedReader reader = new BufferedReader(fileReader);
         String line = reader.readLine();
         String[] elements = line.split(",");
+        Pokemon elem = new Pokemon((Integer.parseInt(elements[0]))-1, elements[1], Integer.parseInt(elements[2]), Integer.parseInt(elements[3]), Integer.parseInt(elements[4]), Integer.parseInt(elements[5]), Integer.parseInt(elements[6]), Integer.parseInt(elements[7]), Integer.parseInt(elements[8]), Double.parseDouble(elements[9]));
+        liste.add(elem);
 
-        pokemon1 = new Pokemon(Integer.parseInt(elements[0]), elements[1], Integer.parseInt(elements[2]), Integer.parseInt(elements[3]), Integer.parseInt(elements[4]), Integer.parseInt(elements[5]), Integer.parseInt(elements[6]), Integer.parseInt(elements[7]), Integer.parseInt(elements[8]), Double.parseDouble(elements[9]));
+        while (line != null){
+            line = reader.readLine();
+            elements = line.split(",");
+            elem = new Pokemon((Integer.parseInt(elements[0]))-1, elements[1], Integer.parseInt(elements[2]), Integer.parseInt(elements[3]), Integer.parseInt(elements[4]), Integer.parseInt(elements[5]), Integer.parseInt(elements[6]), Integer.parseInt(elements[7]), Integer.parseInt(elements[8]), Double.parseDouble(elements[9]));
+            liste.add(elem);
+        }
 
-        line = reader.readLine();
-        elements = line.split(",");
-        pokemon2 = new Pokemon(Integer.parseInt(elements[0]), elements[1], Integer.parseInt(elements[2]), Integer.parseInt(elements[3]), Integer.parseInt(elements[4]), Integer.parseInt(elements[5]), Integer.parseInt(elements[6]), Integer.parseInt(elements[7]), Integer.parseInt(elements[8]), Double.parseDouble(elements[9]));
-
-
-
+        pokemon1 = liste.get(0);
+        pokemon2 = liste.get(133);
         List<Pokemon> pokemon_list = new ArrayList<>();
         pokemon_list.add(pokemon1);
         pokemon_list.add(pokemon2);
 
-        // MOCKs des méthodes
         Mockito.when(pokedex.size()).thenReturn(pokemon_list.size());
         Mockito.when(pokedex.addPokemon(pokemon1)).thenReturn(0);
         Mockito.when(pokedex.addPokemon(pokemon2)).thenReturn(133);
@@ -66,12 +69,12 @@ public class IPokedexTest {
     @Test
     public void testGetPokemon() throws PokedexException {
         Pokemon recup = pokedex.getPokemon(0);
-        assertEquals("pokemon1", recup.getName());
-        assertEquals(613, recup.getCp());
+        assertEquals("Bulbizarre", recup.getName());
+        assertEquals(1280, recup.getCp());
 
         recup = pokedex.getPokemon(133);
-        assertEquals("pokemon2", recup.getName());
-        assertEquals(2729, recup.getCp());
+        assertEquals("Aquali", recup.getName());
+        assertEquals(1643, recup.getCp());
     }
 
     @Test
@@ -80,6 +83,6 @@ public class IPokedexTest {
         List<Pokemon> recup = pokedex.getPokemons();
         assertEquals(2, recup.size());
         assertEquals("pokemon1", recup.get(0).getName());
-        assertEquals("pokemon2", recup.get(133).getName());
+        assertEquals("pokemon2", recup.get(1).getName());
     }
 }
