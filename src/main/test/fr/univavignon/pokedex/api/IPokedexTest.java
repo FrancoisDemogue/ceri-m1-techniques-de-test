@@ -1,5 +1,9 @@
 package fr.univavignon.pokedex.api;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -13,27 +17,38 @@ import static org.junit.Assert.assertEquals;
 public class IPokedexTest {
 
     private IPokedex pokedex;
-    private Pokemon Bulbizarre;
-    private Pokemon Aquali;
+    private Pokemon pokemon1;
+    private Pokemon pokemon2;
 
     @Before
-    public void setup () throws PokedexException {
+    public void setup () throws PokedexException, IOException {
         pokedex = Mockito.mock(IPokedex.class);
 
-        Bulbizarre = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56.0);
-        Aquali = new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 100.0);
+
+        // recuperer la liste des pokemons dans un fichier avec un before each
+        FileReader fileReader = new FileReader("pokemon_151");
+        BufferedReader reader = new BufferedReader(fileReader);
+        String line = reader.readLine();
+        String[] elements = line.split(",");
+
+        pokemon1 = new Pokemon(Integer.parseInt(elements[0]), elements[1], Integer.parseInt(elements[2]), Integer.parseInt(elements[3]), Integer.parseInt(elements[4]), Integer.parseInt(elements[5]), Integer.parseInt(elements[6]), Integer.parseInt(elements[7]), Integer.parseInt(elements[8]), Double.parseDouble(elements[9]));
+
+        line = reader.readLine();
+        elements = line.split(",");
+        pokemon2 = new Pokemon(Integer.parseInt(elements[0]), elements[1], Integer.parseInt(elements[2]), Integer.parseInt(elements[3]), Integer.parseInt(elements[4]), Integer.parseInt(elements[5]), Integer.parseInt(elements[6]), Integer.parseInt(elements[7]), Integer.parseInt(elements[8]), Double.parseDouble(elements[9]));
+
 
 
         List<Pokemon> pokemon_list = new ArrayList<>();
-        pokemon_list.add(Bulbizarre);
-        pokemon_list.add(Aquali);
+        pokemon_list.add(pokemon1);
+        pokemon_list.add(pokemon2);
 
         // MOCKs des méthodes
         Mockito.when(pokedex.size()).thenReturn(pokemon_list.size());
-        Mockito.when(pokedex.addPokemon(Bulbizarre)).thenReturn(0);
-        Mockito.when(pokedex.addPokemon(Aquali)).thenReturn(133);
-        Mockito.when(pokedex.getPokemon(0)).thenReturn(Bulbizarre);
-        Mockito.when(pokedex.getPokemon(133)).thenReturn(Aquali);
+        Mockito.when(pokedex.addPokemon(pokemon1)).thenReturn(0);
+        Mockito.when(pokedex.addPokemon(pokemon2)).thenReturn(133);
+        Mockito.when(pokedex.getPokemon(0)).thenReturn(pokemon1);
+        Mockito.when(pokedex.getPokemon(133)).thenReturn(pokemon2);
         Mockito.when(pokedex.getPokemons()).thenReturn(pokemon_list);
     }
 
@@ -44,18 +59,18 @@ public class IPokedexTest {
 
     @Test
     public void testAddPokemon() {
-        assertEquals(0, pokedex.addPokemon(Bulbizarre));
-        assertEquals(133, pokedex.addPokemon(Aquali));
+        assertEquals(0, pokedex.addPokemon(pokemon1));
+        assertEquals(133, pokedex.addPokemon(pokemon2));
     }
 
     @Test
     public void testGetPokemon() throws PokedexException {
         Pokemon recup = pokedex.getPokemon(0);
-        assertEquals("Bulbizarre", recup.getName());
+        assertEquals("pokemon1", recup.getName());
         assertEquals(613, recup.getCp());
 
         recup = pokedex.getPokemon(133);
-        assertEquals("Aquali", recup.getName());
+        assertEquals("pokemon2", recup.getName());
         assertEquals(2729, recup.getCp());
     }
 
@@ -64,7 +79,7 @@ public class IPokedexTest {
         Comparator<Pokemon> cpComparator = Comparator.comparingInt(Pokemon::getCp);
         List<Pokemon> recup = pokedex.getPokemons();
         assertEquals(2, recup.size());
-        assertEquals("Bulbizarre", recup.get(0).getName());
-        assertEquals("Aquali", recup.get(133).getName());
+        assertEquals("pokemon1", recup.get(0).getName());
+        assertEquals("pokemon2", recup.get(133).getName());
     }
 }

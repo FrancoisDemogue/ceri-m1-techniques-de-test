@@ -9,7 +9,7 @@ Nous vous invitons à conculter la documentation de ces différents outils pour 
 
 ## Épisode 2 - Badger Badger Badger … MUSHROOM
 
-Afin de pouvoir consulter les résultats des différents outils en un coup d'oeil nous allons utiliser des  badges sur le fichier README.md du repository GitHub.  
+Afin de pouvoir consulter les résultats des différents outils en un coup d'oeil nous allons utiliser des  badges sur le fichier README.md du repository GitHub.
 Le fichier README devra contenir :
 
 - Votre nom et prénom.
@@ -22,7 +22,7 @@ Nous vous invitons également à enrichir votre README avec un peu de documentat
 ## Épisode 3 - Make it work !
 
 Tout est prêt pour attaquer l’implémentation !  
-Tâchez de développer les implémentation des interfaces en maintenant un niveau de qualité optimal.  
+Tâchez de développer les implémentation des interfaces en maintenant un niveau de qualité optimal.
 Les détails d’implémentation pourront être discutés avec l'intervenant lors des séances de TP.
 
 <p align="center" style="color: #ffcb05; font-size: 2rem;">
