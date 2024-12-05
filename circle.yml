@@ -15,6 +15,13 @@ jobs:
           name: Lancer les tests unitaires
           command: mvn test  # Exécute les tests unitaires avec Maven
 
+  upload-to-codecov:
+    docker:
+      - image: circleci/python:3.8  # Utilisation d'une image docker avec Python (si nécessaire pour le plugin Codecov)
+    steps:
+      - checkout  # Récupère le code source
+      - codecov/upload  # Étape de l'orb Codecov pour télécharger les résultats
+
 workflows:
   version: 2
   build_and_test:
@@ -24,11 +31,9 @@ workflows:
             branches:
               only:
                 - master  # Filtrer pour que le job soit exécuté uniquement sur la branche master
-  upload-to-codecov:
-    jobs:
-      - checkout
-      - codecov/upload
+      - upload-to-codecov:
+          requires:
+            - build  # S'assure que l'upload est effectué après le job de build
 
 orbs:
   codecov: codecov/codecov@5
-
