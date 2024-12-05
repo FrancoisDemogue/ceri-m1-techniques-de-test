@@ -3,24 +3,24 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:8-jdk  # Utilisation de Java 8, peut être remplacé par 11 ou 17 si besoin
+      - image: circleci/openjdk:8-jdk
     steps:
-      - checkout  # Récupère le code source
+      - checkout
 
       - run:
           name: Configurer Maven
-          command: mvn -B -f pom.xml clean install  # Nettoie le projet et installe les dépendances Maven
+          command: mvn -B -f pom.xml clean install
 
       - run:
           name: Lancer les tests unitaires
-          command: mvn test  # Exécute les tests unitaires avec Maven
+          command: mvn test
 
   upload-to-codecov:
     docker:
-      - image: circleci/python:3.8  # Utilisation d'une image docker avec Python (si nécessaire pour le plugin Codecov)
+      - image: circleci/python:3.8
     steps:
-      - checkout  # Récupère le code source
-      - codecov/upload  # Étape de l'orb Codecov pour télécharger les résultats
+      - checkout
+      - codecov/upload
 
 workflows:
   version: 2
@@ -30,10 +30,10 @@ workflows:
           filters:
             branches:
               only:
-                - master  # Filtrer pour que le job soit exécuté uniquement sur la branche master
+                - master
       - upload-to-codecov:
           requires:
-            - build  # S'assure que l'upload est effectué après le job de build
+            - build
 
 orbs:
   codecov: codecov/codecov@5
