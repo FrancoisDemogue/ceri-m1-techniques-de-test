@@ -15,6 +15,10 @@ jobs:
           name: Lancer les tests unitaires
           command: mvn test  # Exécute les tests unitaires avec Maven
 
+orbs:
+  codecov: codecov/codecov@5
+
+
 workflows:
   version: 2
   build_and_test:
@@ -24,10 +28,7 @@ workflows:
             branches:
               only:
                 - master  # Filtrer pour que le job soit exécuté uniquement sur la branche master
-orbs:
-  codecov: codecov/codecov@5
-workflows:
   upload-to-codecov:
     jobs:
-      - checkout 
+      - checkout
       - codecov/upload
