@@ -1,7 +1,6 @@
-<project
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
     http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
@@ -49,11 +48,13 @@
                 <version>0.8.12</version>
                 <executions>
                     <execution>
+                        <id>prepare-agent</id> <!-- Identifiant unique pour cette exécution -->
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
                     <execution>
+                        <id>report</id> <!-- Identifiant unique pour cette exécution -->
                         <goals>
                             <goal>report</goal>
                         </goals>
@@ -79,10 +80,11 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Remplacer 'RELEASE' par une version explicite de junit-jupiter -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>RELEASE</version>
+            <version>RELEASE</version> <!-- Remplacer par une version précise, ici 5.7.0 -->
             <scope>test</scope>
         </dependency>
     </dependencies>
