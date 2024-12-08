@@ -1,37 +1,54 @@
 version: 2.1
+
 orbs:
-  codecov: codecov/codecov@5
-  
+  codecov: codecov/codecov@3 # Codecov orb pour simplifier l'intégration
+
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/openjdk:8-jdk # Image Docker avec OpenJDK 8
     steps:
+      # Étape 1 : Récupérer le code source
       - checkout
 
+      # Étape 2 : Configurer Maven (installer les dépendances et compiler)
       - run:
-          name: Configurer Maven
+          name: Build and Install Maven Dependencies
           command: mvn -B -f pom.xml clean install
 
+      # Étape 3 : Exécuter les tests unitaires
       - run:
-          name: Lancer les tests unitaires
+          name: Run Unit Tests
           command: mvn test
-      
-      - run:
-          name: Install dependencies
-          command: npm install
-          
-      - run:
-          name: Run tests and collect coverage
-          command: npm run test
-          
-      - codecov/upload
 
+      # Étape 4 : Générer le rapport de couverture JaCoCo
+      - run:
+          name: Generate JaCoCo Coverage Report
+          command: mvn jacoco:report
 
-workflow:
-  version: 2.1
-  build-test:
+      # Étape 5 : Vérification avec Checkstyle
+      - run:
+          name: Run Checkstyle Verification
+          command: mvn checkstyle:check
+
+      # Étape 6 : Générer le rapport HTML Checkstyle
+      - run:
+          name: Generate Checkstyle HTML Report
+          command: mvn checkstyle:checkstyle
+
+      # Étape 7 : Télécharger le rapport de couverture sur Codecov
+      - codecov/upload:
+          file: target/site/jacoco/jacoco.xml # Chemin vers le fichier JaCoCo
+          token: $CODECOV_TOKEN # Utilisation de la variable d'environnement pour le token
+          flags: unittests
+          override_branch: master # Branche cible pour le rapport
+
+workflows:
+  version: 2
+  build_and_test:
     jobs:
-      - build
-
-
+      - build:
+          filters:
+            branches:
+              only:
+                - master # Exécuter uniquement sur la branche "master"
