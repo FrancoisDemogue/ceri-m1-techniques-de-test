@@ -1,5 +1,9 @@
 version: 2.1
 
+
+orbs:
+  codecov: codecov/codecov@5
+  
 jobs:
   build:
     docker:
@@ -15,12 +19,26 @@ jobs:
           name: Lancer les tests unitaires
           command: mvn test
 
-  upload-to-codecov:
-    docker:
-      - image: circleci/python:3.8
-    steps:
-      - checkout
-      - codecov/upload
+  # Generate the JaCoCo report
+      - run:
+          name: Generate Code Coverage Report
+          command: mvn jacoco:report
+
+      # Add Checkstyle verification
+      - run:
+          name: Run Checkstyle Verification
+          command: mvn checkstyle:check
+
+      # Generate Checkstyle HTML report
+      - run:
+          name: Generate Checkstyle HTML Report
+          command: mvn checkstyle:checkstyle
+
+      # Upload the coverage report to Codecov
+      - run:
+          name: Upload to Codecov
+          command: bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN -s target/site/jacoco -r "olfabre/ceri-m1-techniques-de-test"
+
 
 workflows:
   version: 2
@@ -31,9 +49,5 @@ workflows:
             branches:
               only:
                 - master
-      - upload-to-codecov:
-          requires:
-            - build
 
-orbs:
-  codecov: codecov/codecov@5
+
