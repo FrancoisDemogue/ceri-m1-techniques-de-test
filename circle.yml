@@ -1,6 +1,4 @@
 version: 2.1
-
-
 orbs:
   codecov: codecov/codecov@5
   
@@ -37,7 +35,7 @@ jobs:
       # Upload the coverage report to Codecov
       - run:
           name: Upload to Codecov
-          command: bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN -s target/site/jacoco -r "olfabre/ceri-m1-techniques-de-test"
+          command: bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN -s target/site/jacoco -r "FrancoisDemogue/ceri-m1-techniques-de-test"
 
 
 workflows:
