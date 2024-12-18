@@ -28,11 +28,10 @@ jobs:
 
       - run:
           name: Upload du rapport de couverture vers Codecov
-          uses: codecov/codecov-action@v3
-          with:
-            file: target/site/jacoco/jacoco.xml
+          command: |
+            curl -s https://codecov.io/bash | bash -s -- -f target/site/jacoco/jacoco.xml
           env:
-            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+            CODECOV_TOKEN: $CODECOV_TOKEN
 
 
 workflows:
