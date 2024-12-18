@@ -52,23 +52,34 @@
                 <version>0.8.12</version>
                 <executions>
                     <execution>
-                        <id>default-report</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                    <execution>
                         <id>default-check</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>
+                        <configuration>
+                            <!-- Définir les règles de couverture -->
+                            <rules>
+                                <rule>
+                                    <element>CLASS</element>
+                                    <counter>INSTRUCTION</counter>
+                                    <limit>
+                                        <value>80</value>
+                                        <counter>INSTRUCTION</counter>
+                                    </limit>
+                                </rule>
+                                <rule>
+                                    <element>CLASS</element>
+                                    <counter>BRANCH</counter>
+                                    <limit>
+                                        <value>70</value>
+                                        <counter>BRANCH</counter>
+                                    </limit>
+                                </rule>
+                            </rules>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <outputDirectory>target/site/jacoco</outputDirectory>
-                </configuration>
             </plugin>
 
             <!-- Plugin Checkstyle -->
