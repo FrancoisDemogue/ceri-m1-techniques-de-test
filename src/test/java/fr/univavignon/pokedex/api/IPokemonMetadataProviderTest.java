@@ -1,6 +1,6 @@
 package fr.univavignon.pokedex.api;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -9,6 +9,7 @@ import static org.junit.Assert.assertEquals;
 public class IPokemonMetadataProviderTest {
     private IPokemonMetadataProvider pokemonMetadataProvider;
 
+    @BeforeEach
     public void setUp() throws PokedexException {
         pokemonMetadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
         Mockito.when(pokemonMetadataProvider.getPokemonMetadata(0)).thenReturn(new PokemonMetadata(0, "Bulbizarre", 126, 126, 90));

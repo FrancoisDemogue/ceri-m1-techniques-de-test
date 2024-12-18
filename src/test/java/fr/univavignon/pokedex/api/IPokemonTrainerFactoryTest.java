@@ -1,6 +1,7 @@
 package fr.univavignon.pokedex.api;
 
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -12,7 +13,7 @@ public class IPokemonTrainerFactoryTest {
     private IPokedex pokedex;
     private PokemonTrainer trainer;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         pokemonTrainerFactory = Mockito.mock(IPokemonTrainerFactory.class);
         pokedexFactory = Mockito.mock(IPokedexFactory.class);

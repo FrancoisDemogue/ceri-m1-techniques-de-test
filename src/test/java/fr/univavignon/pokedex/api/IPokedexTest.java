@@ -7,8 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -22,12 +23,12 @@ public class IPokedexTest {
     private ArrayList<Pokemon> liste = new ArrayList<>();
 
 
-    @Before
+    @BeforeEach
     public void setup () throws PokedexException, IOException {
         pokedex = Mockito.mock(IPokedex.class);
 
         // recuperer la liste des pokemons dans un fichier avec un before each
-        FileReader fileReader = new FileReader("pokemon_151");
+        FileReader fileReader = new FileReader(Objects.requireNonNull(getClass().getClassLoader().getResource("pokemon_151.txt")).getPath());
         BufferedReader reader = new BufferedReader(fileReader);
         String line = reader.readLine();
         String[] elements = line.split(",");
@@ -36,9 +37,11 @@ public class IPokedexTest {
 
         while (line != null){
             line = reader.readLine();
-            elements = line.split(",");
-            elem = new Pokemon((Integer.parseInt(elements[0]))-1, elements[1], Integer.parseInt(elements[2]), Integer.parseInt(elements[3]), Integer.parseInt(elements[4]), Integer.parseInt(elements[5]), Integer.parseInt(elements[6]), Integer.parseInt(elements[7]), Integer.parseInt(elements[8]), Double.parseDouble(elements[9]));
-            liste.add(elem);
+            if (line != null) {
+                elements = line.split(",");
+                elem = new Pokemon((Integer.parseInt(elements[0])) - 1, elements[1], Integer.parseInt(elements[2]), Integer.parseInt(elements[3]), Integer.parseInt(elements[4]), Integer.parseInt(elements[5]), Integer.parseInt(elements[6]), Integer.parseInt(elements[7]), Integer.parseInt(elements[8]), Double.parseDouble(elements[9]));
+                liste.add(elem);
+            }
         }
 
         pokemon1 = liste.get(0);
@@ -82,7 +85,7 @@ public class IPokedexTest {
         Comparator<Pokemon> cpComparator = Comparator.comparingInt(Pokemon::getCp);
         List<Pokemon> recup = pokedex.getPokemons();
         assertEquals(2, recup.size());
-        assertEquals("pokemon1", recup.get(0).getName());
-        assertEquals("pokemon2", recup.get(1).getName());
+        assertEquals(pokemon1.getName(), recup.get(0).getName());
+        assertEquals(pokemon2.getName(), recup.get(1).getName());
     }
 }

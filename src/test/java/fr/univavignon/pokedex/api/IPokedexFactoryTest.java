@@ -1,6 +1,6 @@
 package fr.univavignon.pokedex.api;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -12,7 +12,7 @@ public class IPokedexFactoryTest {
     private IPokemonFactory pokemonFactory;
     private IPokedex pokedex;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         pokedexFactory = Mockito.mock(IPokedexFactory.class);
         metadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
