@@ -15,10 +15,6 @@ jobs:
           command: mvn -B -f pom.xml clean install
 
       - run:
-          name: Install dependencies
-          command: npm install
-
-      - run:
           name: Lancer les tests unitaires avec JaCoCo
           command: mvn test
 
@@ -36,6 +32,7 @@ jobs:
             curl -s https://codecov.io/bash | bash -s -- -f target/site/jacoco/jacoco.xml
           env:
             CODECOV_TOKEN: $CODECOV_TOKEN
+      - codecov/upload
 
 
 workflows:
