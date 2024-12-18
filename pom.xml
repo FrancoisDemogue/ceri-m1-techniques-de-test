@@ -58,22 +58,17 @@
                             <goal>check</goal>
                         </goals>
                         <configuration>
-                            <!-- Définir les règles de couverture -->
                             <rules>
                                 <rule>
                                     <element>CLASS</element>
-                                    <counter>INSTRUCTION</counter>
                                     <limit>
                                         <value>80</value>
-                                        <counter>INSTRUCTION</counter>
                                     </limit>
                                 </rule>
                                 <rule>
-                                    <element>CLASS</element>
-                                    <counter>BRANCH</counter>
+                                    <element>METHOD</element>
                                     <limit>
                                         <value>70</value>
-                                        <counter>BRANCH</counter>
                                     </limit>
                                 </rule>
                             </rules>
