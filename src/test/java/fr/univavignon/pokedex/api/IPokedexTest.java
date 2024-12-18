@@ -1,7 +1,6 @@
 package fr.univavignon.pokedex.api;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,13 +8,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
 
-public class IPokedexTest {
+class IPokedexTest {
 
     private IPokedex pokedex;
     private Pokemon pokemon1;
@@ -58,34 +58,34 @@ public class IPokedexTest {
         Mockito.when(pokedex.getPokemons()).thenReturn(pokemon_list);
     }
 
-    @org.junit.Test
-    public void testSize() {
-        assertEquals(2, pokedex.size());
+    @Test
+    void testSize() {
+        Assertions.assertEquals(2, pokedex.size());
     }
 
     @Test
     public void testAddPokemon() {
-        assertEquals(0, pokedex.addPokemon(pokemon1));
-        assertEquals(133, pokedex.addPokemon(pokemon2));
+        Assertions.assertEquals(0, pokedex.addPokemon(pokemon1));
+        Assertions.assertEquals(133, pokedex.addPokemon(pokemon2));
     }
 
     @Test
     public void testGetPokemon() throws PokedexException {
         Pokemon recup = pokedex.getPokemon(0);
-        assertEquals("Bulbizarre", recup.getName());
-        assertEquals(1280, recup.getCp());
+        Assertions.assertEquals("Bulbizarre", recup.getName());
+        Assertions.assertEquals(1280, recup.getCp());
 
         recup = pokedex.getPokemon(133);
-        assertEquals("Aquali", recup.getName());
-        assertEquals(1643, recup.getCp());
+        Assertions.assertEquals("Aquali", recup.getName());
+        Assertions.assertEquals(1643, recup.getCp());
     }
 
     @Test
     public void testGetPokemons() {
         Comparator<Pokemon> cpComparator = Comparator.comparingInt(Pokemon::getCp);
         List<Pokemon> recup = pokedex.getPokemons();
-        assertEquals(2, recup.size());
-        assertEquals(pokemon1.getName(), recup.get(0).getName());
-        assertEquals(pokemon2.getName(), recup.get(1).getName());
+        Assertions.assertEquals(2, recup.size());
+        Assertions.assertEquals(pokemon1.getName(), recup.get(0).getName());
+        Assertions.assertEquals(pokemon2.getName(), recup.get(1).getName());
     }
 }
