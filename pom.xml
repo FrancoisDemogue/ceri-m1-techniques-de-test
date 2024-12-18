@@ -95,6 +95,16 @@
         </plugins>
     </build>
 
+    <profiles>
+        <!-- Profil de debug -->
+        <profile>
+            <id>debug</id>
+            <properties>
+                <maven.surefire.debug>true</maven.surefire.debug>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
         <!-- Dépendance JUnit -->
         <dependency>
