@@ -27,12 +27,6 @@ jobs:
           command: mvn checkstyle:checkstyle
 
       - run:
-          name: Sauvegarder les rapports Surefire
-          command: mkdir -p ~/test-reports && cp -r target/surefire-reports/* ~/test-reports
-      - store_test_results:
-          path: ~/test-reports
-
-      - run:
           name: Upload du rapport de couverture vers Codecov
           command: |
             curl -s https://codecov.io/bash | bash -s -f target/site/jacoco/jacoco.xml
