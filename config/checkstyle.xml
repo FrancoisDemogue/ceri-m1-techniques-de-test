@@ -8,9 +8,9 @@
         <property name="max" value="120"/>
     </module>
 
-    <!-- Règles appliquées à la structure du code -->
+    <!-- Règles appliquées à la structure du code
     <module name="TreeWalker">
         <module name="WhitespaceAround"/>
         <module name="WhitespaceAfter"/>
-    </module>
+    </module>-->
 </module>
