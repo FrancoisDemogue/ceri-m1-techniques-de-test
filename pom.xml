@@ -50,12 +50,14 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.12</version>
                 <executions>
+                    <!-- Ajoute l'agent lors de la phase "test" -->
                     <execution>
                         <id>prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
+                    <!-- Génère un rapport de couverture lors de la phase "verify" -->
                     <execution>
                         <id>report</id>
                         <goals>
