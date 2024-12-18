@@ -28,7 +28,12 @@ jobs:
 
       - run:
           name: Upload du rapport de couverture vers Codecov
-          command: bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN -f target/site/jacoco/jacoco.xml -r "FrancoisDemogue/ceri-m1-techniques-de-test"
+          uses: codecov/codecov-action@v3
+          with:
+            file: target/site/jacoco/jacoco.xml
+          env:
+            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
 
 workflows:
   version: 2
