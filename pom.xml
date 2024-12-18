@@ -46,6 +46,29 @@
             </configuration>
         </plugin>
         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <version>3.6.0</version>
+            <configuration>
+                <!-- Emplacement du fichier Checkstyle -->
+                <configLocation>config/checkstyle.xml</configLocation>
+
+                <!-- Ne pas échouer en cas de violations -->
+                <failsOnError>false</failsOnError>
+
+                <!-- Désactive les liens croisés dans le rapport -->
+                <linkXRef>false</linkXRef>
+            </configuration>
+            <executions>
+                <execution>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>check</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.8.12</version>
