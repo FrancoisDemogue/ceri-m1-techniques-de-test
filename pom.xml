@@ -61,13 +61,16 @@
                             <rules>
                                 <rule>
                                     <element>CLASS</element>
-                                    <counter>INSTRUCTION</counter>
-                                    <value>0.80</value>
-                                </rule>
-                                <rule>
-                                    <element>CLASS</element>
-                                    <counter>BRANCH</counter>
-                                    <value>0.70</value>
+                                    <limits>
+                                        <limit>
+                                            <counter>INSTRUCTION</counter>
+                                            <value>80</value>
+                                        </limit>
+                                        <limit>
+                                            <counter>BRANCH</counter>
+                                            <value>70</value>
+                                        </limit>
+                                    </limits>
                                 </rule>
                             </rules>
                         </configuration>
