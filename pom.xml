@@ -62,12 +62,14 @@
                                 <rule>
                                     <element>CLASS</element>
                                     <limit>
+                                        <counter>INSTRUCTION</counter>
                                         <value>80</value>
                                     </limit>
                                 </rule>
                                 <rule>
-                                    <element>METHOD</element>
+                                    <element>CLASS</element>
                                     <limit>
+                                        <counter>BRANCH</counter>
                                         <value>70</value>
                                     </limit>
                                 </rule>
