@@ -52,19 +52,23 @@
                 <version>0.8.12</version>
                 <executions>
                     <execution>
-                        <id>prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
+                        <id>default-report</id>
+                        <phase>verify</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
+                    </execution>
+                    <execution>
+                        <id>default-check</id>
                         <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <outputDirectory>target/site/jacoco</outputDirectory>
+                </configuration>
             </plugin>
 
             <!-- Plugin Checkstyle -->
