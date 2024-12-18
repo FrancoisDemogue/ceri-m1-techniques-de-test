@@ -1,102 +1,40 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
-# Import the Codecov orb
 orbs:
-  codecov: codecov/codecov@4.0.1
+  codecov: codecov/codecov@5
 
-# Define a job to be invoked later in a workflow.
 jobs:
-  build-and-test:
+  build:
     docker:
-      - image: cimg/openjdk:21.0
+      - image: circleci/openjdk:8-jdk
     steps:
-      # Checkout the code as the first step.
       - checkout
 
-      # Build the project
       - run:
-          name: Build
-          command: mvn -B -DskipTests clean package
+          name: Configurer Maven
+          command: mvn -B -f pom.xml clean install
 
-      # Run tests
       - run:
-          name: Test
+          name: Lancer les tests unitaires avec JaCoCo
           command: mvn test
 
-      # Generate the JaCoCo report
       - run:
-          name: Generate Code Coverage Report
+          name: Générer le rapport de couverture JaCoCo
           command: mvn jacoco:report
 
-      # Add Checkstyle verification
       - run:
-          name: Run Checkstyle Verification
-          command: mvn checkstyle:check
-
-      # Generate Checkstyle HTML report
-      - run:
-          name: Generate Checkstyle HTML Report
+          name: Générer le rapport HTML Checkstyle
           command: mvn checkstyle:checkstyle
 
-      # Upload the coverage report to Codecov
       - run:
-          name: Upload to Codecov
-          command: bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN -s target/site/jacoco -r "olfabre/ceri-m1-techniques-de-test"
+          name: Upload du rapport de couverture vers Codecov
+          command: bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN -f target/site/jacoco/jacoco.xml -r "FrancoisDemogue/ceri-m1-techniques-de-test"
 
-  docs-deploy:
-    docker:
-      - image: cimg/openjdk:20.0
-    steps:
-      - checkout
-
-      - run:
-          name: Generate Javadoc
-          command: |
-            mvn javadoc:javadoc
-
-
-      - run:
-          name: Install and configure gh-pages
-          command: |
-            git config --global user.email "olfabre@gmail.com"
-            git config --global user.name "olfabre"
-
-            # Clone le dépôt
-            git clone https://$TOKEN_JAVADOC@github.com/olfabre/ceri-m1-techniques-de-test.git gh-pages
-            cd gh-pages
-
-            # Basculer ou créer la branche gh-pages
-            git checkout gh-pages || git checkout -b gh-pages
-
-            # Mettre à jour la branche gh-pages avec les changements distants
-            git pull origin gh-pages --rebase || echo "No remote changes to pull"
-
-            # Copier les fichiers Javadoc
-            cp -r target/site/apidocs/* ./
-
-            # Ajouter, committer et pousser les changements
-            git add -A
-            git commit -m "[skip ci] Updated Javadoc" || echo "No changes to commit"
-            git push https://$TOKEN_JAVADOC@github.com/olfabre/ceri-m1-techniques-de-test.git gh-pages --force
-
-# Orchestrate jobs using workflows
-# See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
 workflows:
   version: 2
-  sample-workflow: # This is the name of the workflow, feel free to change it to better match your workflow.
-    when:
-      branch: master
+  build_and_test:
     jobs:
-      - build-and-test:
-          filters:
-            branches:
-              only:
-                - master
-      - docs-deploy:
-          requires:
-            - build-and-test
+      - build:
           filters:
             branches:
               only:
