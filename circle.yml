@@ -25,10 +25,8 @@ jobs:
       - run:
           name: Générer le rapport HTML Checkstyle
           command: mvn checkstyle:checkstyle
+      - codecov/upload
 
-      - run:
-          name: Upload du rapport de couverture vers Codecov
-          command: bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN -f target/site/jacoco/jacoco.xml -r "FrancoisDemogue/ceri-m1-techniques-de-test"
 
 workflows:
   version: 2
