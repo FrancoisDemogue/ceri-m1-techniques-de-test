@@ -1,5 +1,17 @@
 # UCE Génie Logiciel Avancé : Techniques de tests
 
+---
+
+François Demogue
+
+Groupe IA classique
+
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/FrancoisDemogue/ceri-m1-techniques-de-test/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/FrancoisDemogue/ceri-m1-techniques-de-test/tree/master)
+
+[![codecov](https://codecov.io/gh/FrancoisDemogue/ceri-m1-techniques-de-test/graph/badge.svg?token=Q9B5D3E0JT)](https://codecov.io/gh/FrancoisDemogue/ceri-m1-techniques-de-test)
+
+---
+
 ## Introduction
 
 Vous allez à travers ces projet mettre en application une partie des aspects évoqués en cours vis à vis des techniques de tests.  
@@ -38,10 +50,5 @@ Si vous ne spécifiez pas de tag, le dernier commit à la date-heure de la fin d
 
 ---
 
-François Demogue
+# Approche
 
-Groupe IA classique
-
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/FrancoisDemogue/ceri-m1-techniques-de-test/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/FrancoisDemogue/ceri-m1-techniques-de-test/tree/master)
-
-[![codecov](https://codecov.io/gh/FrancoisDemogue/ceri-m1-techniques-de-test/graph/badge.svg?token=Q9B5D3E0JT)](https://codecov.io/gh/FrancoisDemogue/ceri-m1-techniques-de-test)
