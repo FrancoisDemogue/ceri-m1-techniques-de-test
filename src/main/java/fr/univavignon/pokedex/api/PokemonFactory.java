@@ -10,7 +10,7 @@ public class PokemonFactory implements IPokemonFactory {
 
     // Création du Pokémon désigné par l'index
     @Override
-    public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) {
+    public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) throws PokedexException {
         if (index < 0 || index > 151) {
             throw new PokedexException("Pokemon avec l'id " + index + " n'existe pas.");
         }
@@ -18,8 +18,8 @@ public class PokemonFactory implements IPokemonFactory {
         // Récupérer les métadonnées du Pokémon
         PokemonMetadata metadata = metadataProvider.getPokemonMetadata(index);
 
-        return new Pokemon(index, metadata.getName(), metadata.getAttack(), metadata.getDefense(), metadata.getStamina(), 
-                           cp, hp, dust, candy, calculateIv(metadata));
+        return new Pokemon(index, metadata.getName(), metadata.getAttack(), metadata.getDefense(),
+                metadata.getStamina(), cp, hp, dust, candy, calculateIv(metadata));
     }
 
     // Calcul de l'IV basé sur les statistiques du Pokémon

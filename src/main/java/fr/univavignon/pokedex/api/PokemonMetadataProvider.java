@@ -28,7 +28,7 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
                 int defense = Integer.parseInt(parts[3]);
                 int stamina = Integer.parseInt(parts[4]);
                 PokemonMetadata metadata = new PokemonMetadata(index, name, attack, defense, stamina);
-                metadataCache.put(index, metadata);
+                this.metadataCache.put(index, metadata);
             }
         } catch (IOException e) {
             e.printStackTrace();
