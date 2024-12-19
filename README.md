@@ -10,6 +10,8 @@ Groupe IA classique
 
 [![codecov](https://codecov.io/gh/FrancoisDemogue/ceri-m1-techniques-de-test/graph/badge.svg?token=Q9B5D3E0JT)](https://codecov.io/gh/FrancoisDemogue/ceri-m1-techniques-de-test)
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/e444832e731e460590215a824061ab40)](https://app.codacy.com/gh/FrancoisDemogue/ceri-m1-techniques-de-test/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+
 ---
 
 ## Introduction
