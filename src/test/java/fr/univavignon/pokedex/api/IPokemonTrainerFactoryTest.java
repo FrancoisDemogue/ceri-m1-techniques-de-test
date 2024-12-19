@@ -1,11 +1,9 @@
 package fr.univavignon.pokedex.api;
 
-import org.junit.Before;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import static org.junit.Assert.assertEquals;
 
 public class IPokemonTrainerFactoryTest {
     private IPokemonTrainerFactory pokemonTrainerFactory;
