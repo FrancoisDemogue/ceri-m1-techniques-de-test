@@ -9,7 +9,7 @@ import java.util.Map;
 public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 
     private static final String FILE_PATH = "pokemon_151.txt";
-    private final Map<Integer, PokemonMetadata> metadataCache;
+    final Map<Integer, PokemonMetadata> metadataCache;
 
     public PokemonMetadataProvider() {
         metadataCache = new HashMap<>();
