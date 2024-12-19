@@ -5,10 +5,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 
-    private static final String FILE_PATH = "pokemon_151.txt";
     final Map<Integer, PokemonMetadata> metadataCache;
 
     public PokemonMetadataProvider() {
@@ -18,7 +18,7 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 
     //récupère les données dans le fichier concerné
     private void loadMetadataFromFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(Objects.requireNonNull(getClass().getClassLoader().getResource("pokemon_151.txt")).getPath()))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
