@@ -43,9 +43,8 @@ jobs:
           command: mvn javadoc:javadoc
 
       - run:
-          name: Préparer les fichiers pour GitHub Pages
-          command: |
-          # Créer un dossier temporaire pour la Javadoc
+        name: Préparer les fichiers pour GitHub Pages
+        command: |
           mkdir -p gh-pages
           cp -R target/site/apidocs/* gh-pages/
           cd gh-pages
