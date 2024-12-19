@@ -29,7 +29,7 @@ jobs:
             cp -R target/reports/apidocs/* gh-pages/
             cd gh-pages
             git init
-            git remote add origin https://$GH_TOKEN@github.com/FrancoisDemogue/ceri-m1-techniques-de-test.git
+            git remote add origin https://github.com/FrancoisDemogue/ceri-m1-techniques-de-test.git
             git fetch origin gh-pages || git checkout --orphan gh-pages
             git checkout gh-pages
             # Copier la nouvelle Javadoc
