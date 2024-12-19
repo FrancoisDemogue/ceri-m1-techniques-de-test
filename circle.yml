@@ -11,6 +11,10 @@ jobs:
       - checkout
 
       - run:
+          name: Installer Maven
+          command: apt-get update && apt-get install -y maven
+
+      - run:
           name: Configurer Maven
           command: mvn -B -f pom.xml clean install
 
@@ -33,6 +37,28 @@ jobs:
           env:
             CODECOV_TOKEN: $CODECOV_TOKEN
       - codecov/upload
+
+      - run:
+          name: Générer la Javadoc
+          command: mvn javadoc:javadoc
+
+      - run:
+          name: Préparer les fichiers pour GitHub Pages
+          command: |
+          # Créer un dossier temporaire pour la Javadoc
+          mkdir -p gh-pages
+          cp -R target/site/apidocs/* gh-pages/
+          cd gh-pages
+          git init
+          git remote add origin https://$GH_TOKEN@github.com/<votre-utilisateur>/<votre-repo>.git
+          git fetch origin gh-pages || echo "La branche gh-pages n'existe pas encore"
+          git checkout -B gh-pages
+          # Copier la nouvelle Javadoc
+          cp -R ../gh-pages/* .
+          # Ajouter et valider les changements
+          git add .
+          git commit -m "Mise à jour de la Javadoc [skip ci]" || echo "Aucun changement détecté"
+          git push -u origin gh-pages
 
 
 workflows:
