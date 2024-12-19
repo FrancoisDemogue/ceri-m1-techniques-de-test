@@ -15,13 +15,19 @@ jobs:
           command: mvn -B -f pom.xml clean install
 
       - run:
+          name: Build docs
+          command: cd docs/ && make html
+      - persist_to_workspace:
+          root: docs/_build
+          paths: html
+
+      - run:
           name: Lancer les tests unitaires avec JaCoCo et générer le rapport
           command: mvn clean test -X
 
       - run:
           name: Vérifier la présence du rapport JaCoCo
           command: ls -l target/site/jacoco/
-
 
       - run:
           name: Générer le rapport HTML Checkstyle
