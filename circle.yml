@@ -50,8 +50,8 @@ jobs:
             cd gh-pages
             git init
             git remote add origin https://$GH_TOKEN@github.com/FrancoisDemogue/ceri-m1-techniques-de-test.git
-            git fetch origin gh-pages || echo "La branche gh-pages n'existe pas encore"
-            git checkout -B gh-pages
+            git fetch origin gh-pages || git checkout --orphan gh-pages
+            git checkout gh-pages
             # Copier la nouvelle Javadoc
             cp -R ../gh-pages/* .
             # Ajouter et valider les changements
