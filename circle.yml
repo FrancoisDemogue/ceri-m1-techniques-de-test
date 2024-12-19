@@ -15,12 +15,8 @@ jobs:
           command: mvn -B -f pom.xml clean install
 
       - run:
-          name: Lancer les tests unitaires avec JaCoCo
-          command: mvn test
-
-      - run:
-          name: Générer le rapport de couverture JaCoCo
-          command: mvn jacoco:report
+          name: Lancer les tests unitaires avec JaCoCo et générer le rapport
+          command: mvn clean verify
 
       - run:
           name: Générer le rapport HTML Checkstyle
