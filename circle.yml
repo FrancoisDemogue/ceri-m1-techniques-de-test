@@ -46,10 +46,10 @@ jobs:
           name: Préparer les fichiers pour GitHub Pages
           command: |
             mkdir -p gh-pages
-            cp -R target/site/apidocs/* gh-pages/
+            cp -R target/reports/apidocs/* gh-pages/
             cd gh-pages
             git init
-            git remote add origin https://$GH_TOKEN@github.com/<votre-utilisateur>/<votre-repo>.git
+            git remote add origin https://$GH_TOKEN@github.com/FrancoisDemogue/ceri-m1-techniques-de-test.git
             git fetch origin gh-pages || echo "La branche gh-pages n'existe pas encore"
             git checkout -B gh-pages
             # Copier la nouvelle Javadoc
