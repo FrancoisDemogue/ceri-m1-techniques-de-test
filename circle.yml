@@ -15,21 +15,6 @@ jobs:
           command: mvn -B -f pom.xml clean install
 
       - run:
-          name: Install dependencies
-          command: pip install -r requirements.txt
-
-      - run:
-          name: Test
-          command: pytest
-
-      - run:
-          name: Build docs
-          command: cd docs/ && make html
-      - persist_to_workspace:
-          root: docs/_build
-          paths: html
-
-      - run:
           name: Lancer les tests unitaires avec JaCoCo et générer le rapport
           command: mvn clean test -X
 
