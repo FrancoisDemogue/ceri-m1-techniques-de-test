@@ -19,6 +19,11 @@ jobs:
           command: mvn clean test
 
       - run:
+          name: Vérifier la présence du rapport JaCoCo
+          command: ls -l target/site/jacoco/
+
+
+      - run:
           name: Générer le rapport HTML Checkstyle
           command: mvn checkstyle:checkstyle
 
