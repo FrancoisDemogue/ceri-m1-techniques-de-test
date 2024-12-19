@@ -19,26 +19,6 @@ jobs:
           command: mvn -B -f pom.xml clean install
 
       - run:
-          name: Lancer les tests unitaires avec JaCoCo et générer le rapport
-          command: mvn clean test -X
-
-      - run:
-          name: Vérifier la présence du rapport JaCoCo
-          command: ls -l target/site/jacoco/
-
-      - run:
-          name: Générer le rapport HTML Checkstyle
-          command: mvn checkstyle:checkstyle
-
-      - run:
-          name: Upload du rapport de couverture vers Codecov
-          command: |
-            curl -s https://codecov.io/bash | bash -s
-          env:
-            CODECOV_TOKEN: $CODECOV_TOKEN
-      - codecov/upload
-
-      - run:
           name: Générer la Javadoc
           command: mvn javadoc:javadoc
 
@@ -58,6 +38,26 @@ jobs:
             git add .
             git commit -m "Mise à jour de la Javadoc [skip ci]" || echo "Aucun changement détecté"
             git push -u origin gh-pages
+
+      - run:
+          name: Lancer les tests unitaires avec JaCoCo et générer le rapport
+          command: mvn clean test -X
+
+      - run:
+          name: Vérifier la présence du rapport JaCoCo
+          command: ls -l target/site/jacoco/
+
+      - run:
+          name: Générer le rapport HTML Checkstyle
+          command: mvn checkstyle:checkstyle
+
+      - run:
+          name: Upload du rapport de couverture vers Codecov
+          command: |
+            curl -s https://codecov.io/bash | bash -s
+          env:
+            CODECOV_TOKEN: $CODECOV_TOKEN
+      - codecov/upload
 
 
 workflows:
