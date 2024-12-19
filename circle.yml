@@ -16,7 +16,7 @@ jobs:
 
       - run:
           name: Lancer les tests unitaires avec JaCoCo et générer le rapport
-          command: mvn clean test
+          command: mvn clean test -X
 
       - run:
           name: Vérifier la présence du rapport JaCoCo

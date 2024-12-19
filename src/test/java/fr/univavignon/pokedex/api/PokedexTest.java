@@ -67,7 +67,7 @@ class PokedexTest {
         assertEquals(bulbizarre, fetchedPokemon);
 
         // Vérifie qu'une exception est levée pour un ID invalide
-        assertThrows(PokedexException.class, () -> pokedex.getPokemon(10));
+        assertThrows(PokedexException.class, () -> pokedex.getPokemon(-10));
     }
 
     @Test
