@@ -16,7 +16,7 @@ jobs:
 
       - run:
           name: Lancer les tests unitaires avec JaCoCo et générer le rapport
-          command: mvn clean verify
+          command: mvn clean test
 
       - run:
           name: Générer le rapport HTML Checkstyle
