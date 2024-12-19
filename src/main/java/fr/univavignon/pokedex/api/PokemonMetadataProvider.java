@@ -18,7 +18,8 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 
     //récupère les données dans le fichier concerné
     private void loadMetadataFromFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(Objects.requireNonNull(getClass().getClassLoader().getResource("pokemon_151.txt")).getPath()))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(Objects.requireNonNull(getClass().
+                getClassLoader().getResource("pokemon_151.txt")).getPath()))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
