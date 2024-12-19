@@ -36,6 +36,8 @@ Si vous ne spécifiez pas de tag, le dernier commit à la date-heure de la fin d
 
 [^1]: Si vous n’êtes vraiment pas à l’aise avec cet outil nous vous conseillons quand même vivement de vous y mettre.
 
+---
+
 François Demogue
 
 Groupe IA classique
