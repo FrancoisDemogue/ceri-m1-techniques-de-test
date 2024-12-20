@@ -26,7 +26,7 @@ jobs:
           name: Préparer les fichiers pour GitHub Pages
           command: |
             mkdir -p gh-pages
-            rsync -av --ignore-existing target/site/apidocs/ gh-pages/
+            cp -R target/site/apidocs/* gh-pages/
             cd gh-pages
             git init
             git remote add origin https://github.com/FrancoisDemogue/ceri-m1-techniques-de-test.git
