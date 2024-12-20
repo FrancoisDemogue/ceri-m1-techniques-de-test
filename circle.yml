@@ -28,9 +28,9 @@ jobs:
             git config --global user.email "francois.demogue@alumni.univ-avignon.fr"
             git config --global user.name "FrancoisDemogue"
 
-      - run:
-          name: Test SSH connection to GitHub
-          command: ssh -T git@github.com
+      #- run:
+      #    name: Test SSH connection to GitHub
+      #    command: ssh -T git@github.com
 
 
       #- run:
