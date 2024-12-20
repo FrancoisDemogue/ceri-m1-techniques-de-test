@@ -11,6 +11,5 @@
     <!-- Règles appliquées à la structure du code  -->
     <module name="TreeWalker">
         <module name="WhitespaceAround"/>
-        <module name="WhitespaceAfter"/>
     </module>
 </module>
