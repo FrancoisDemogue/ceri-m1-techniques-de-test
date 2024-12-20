@@ -23,6 +23,12 @@ jobs:
           command: mvn javadoc:javadoc
 
       - run:
+          name: Configurer l'identité de l'auteur Git
+          command: |
+            git config --global user.email "francois.demogue@alumni.univ-avignon.fr"
+            git config --global user.name "FrancoisDemogue"
+
+      - run:
           name: Préparer les fichiers pour GitHub Pages
           command: |
             mkdir -p gh-pages
