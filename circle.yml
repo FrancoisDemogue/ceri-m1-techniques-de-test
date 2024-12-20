@@ -29,13 +29,18 @@ jobs:
             git config --global user.name "FrancoisDemogue"
 
       - run:
+          name: Test SSH connection to GitHub
+          command: ssh -T git@github.com
+
+
+      - run:
           name: Préparer les fichiers pour GitHub Pages
           command: |
             mkdir -p gh-pages
             cp -R target/reports/apidocs/* gh-pages/
             cd gh-pages
             git init
-            git remote add origin https://github.com/FrancoisDemogue/ceri-m1-techniques-de-test.git
+            git remote add origin git@github.com/FrancoisDemogue/ceri-m1-techniques-de-test.git
             git fetch origin gh-pages || echo "La branche gh-pages n'existe pas encore"
             git checkout -B gh-pages || git checkout --orphan gh-pages
             git add .
