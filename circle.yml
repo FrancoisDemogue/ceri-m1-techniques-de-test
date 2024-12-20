@@ -29,11 +29,6 @@ jobs:
             git config --global user.name "FrancoisDemogue"
 
       - run:
-          name: Test SSH connection to GitHub
-          command: ssh -T git@github.com
-
-
-      - run:
           name: Préparer les fichiers pour GitHub Pages
           command: |
             mkdir -p gh-pages
