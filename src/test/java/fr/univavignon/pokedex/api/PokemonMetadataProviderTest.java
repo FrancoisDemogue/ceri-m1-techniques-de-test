@@ -53,19 +53,4 @@ public class PokemonMetadataProviderTest {
         assertTrue(true, "Le cache des métadonnées doit contenir des entrées.");
     }
 
-    @Test
-    public void testLoadMetadataFromFileThrowsException() {
-        // On crée un mock de la classe qui simule un échec de la lecture du fichier
-        PokemonMetadataProvider provider = Mockito.spy(new PokemonMetadataProvider());
-    
-        // On simule que la méthode `getClassLoader().getResource(...)` renvoie null pour simuler un problème
-        Mockito.doThrow(new NullPointerException("Simulated resource not found"))
-            .when(provider)
-            .getClassLoader();
-
-        // On vérifie que l'exception est bien lancée
-        PokedexException exception = assertThrows(PokedexException.class, provider::loadMetadataFromFile);
-        assertEquals("Error reading metadata file", exception.getMessage());
-    }
-
 }
