@@ -32,7 +32,7 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
                 this.metadataCache.put(index, metadata);
             }
         } catch (IOException e) {
-            throw new PokedexException("Error reading metadata file", e);
+            e.printStackTrace();
         }
     }
 
