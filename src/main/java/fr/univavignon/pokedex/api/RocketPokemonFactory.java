@@ -23,7 +23,7 @@ public class RocketPokemonFactory implements IPokemonFactory {
 	
 	private static int generateRandomStat() {
 		int total = 0;
-		for(int i=0; i < 1000000; i++)
+		for (int i = 0; i < 1000000; i++)
 		{
 			Random rn = new Random();
 		    int r = rn.nextInt(2);
@@ -35,7 +35,7 @@ public class RocketPokemonFactory implements IPokemonFactory {
 	@Override
 	public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) {
 		String name;
-		if(!index2name.containsKey(index)) {
+		if ( !index2name.containsKey(index) ) {
 			name = index2name.get(0);
 		} else {
 			name = index2name.get(index);
@@ -44,7 +44,7 @@ public class RocketPokemonFactory implements IPokemonFactory {
 		int defense;
 		int stamina;
 		double iv;
-		if(index < 0) {
+		if (index < 0) {
 			attack = 1000;
 			defense = 1000;
 			stamina = 1000;
