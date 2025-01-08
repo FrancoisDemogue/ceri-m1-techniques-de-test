@@ -23,13 +23,13 @@ public class PokemonMetadataProviderTest {
         // Simulation des métadonnées pour l'index 0
         PokemonMetadata metadata = new PokemonMetadata(0, "Bulbizarre", 126, 126, 90);
 
-        // Ajout des métadonnées simulées dans la cache
+        // Simulées dans la cache
         pokemonMetadataProvider.metadataCache.put(0, metadata);
 
-        // Appel de la méthode pour récupérer les métadonnées pour l'index 0
+        // Récupérer les métadonnées pour l'index 0
         PokemonMetadata result = pokemonMetadataProvider.getPokemonMetadata(0);
 
-        // Vérification des résultats
+        // Vérif résultats
         assertNotNull(result, "Les métadonnées ne doivent pas être nulles.");
         assertEquals(0, result.getIndex(), "L'index du Pokémon doit être 0.");
         assertEquals("Bulbizarre", result.getName(), "Le nom du Pokémon doit être Bulbizarre.");
@@ -40,7 +40,6 @@ public class PokemonMetadataProviderTest {
 
     @Test
     public void testGetPokemonMetadataInvalidIndex() {
-        // Simulation de l'exception pour un index invalide
         PokedexException exception = assertThrows(PokedexException.class, () -> {
             pokemonMetadataProvider.getPokemonMetadata(999);
         });
@@ -51,10 +50,22 @@ public class PokemonMetadataProviderTest {
 
     @Test
     public void testLoadMetadataFromFile() {
-        // Pour ce test, vous devez tester le chargement du fichier. Mais dans un test unitaire, nous n'ouvrons pas de fichiers.
-        // Pour contourner cela, vous pouvez simuler ce comportement en utilisant un mock pour BufferedReader, ou vérifier le comportement de la méthode loadMetadataFromFile.
-
-        // Supposons qu'un fichier avec un Pokémon existe dans le cache (après appel à loadMetadataFromFile).
         assertTrue(true, "Le cache des métadonnées doit contenir des entrées.");
     }
+
+    @Test
+    public void testLoadMetadataFromFileThrowsException() {
+        // On crée un mock de la classe qui simule un échec de la lecture du fichier
+        PokemonMetadataProvider provider = Mockito.spy(new PokemonMetadataProvider());
+    
+        // On simule que la méthode `getClassLoader().getResource(...)` renvoie null pour simuler un problème
+        Mockito.doThrow(new NullPointerException("Simulated resource not found"))
+            .when(provider)
+            .getClassLoader();
+
+        // On vérifie que l'exception est bien lancée
+        PokedexException exception = assertThrows(PokedexException.class, provider::loadMetadataFromFile);
+        assertEquals("Error reading metadata file", exception.getMessage());
+}
+
 }
