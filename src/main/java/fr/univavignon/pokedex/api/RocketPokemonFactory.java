@@ -21,7 +21,7 @@ public class RocketPokemonFactory implements IPokemonFactory {
         index2name = UnmodifiableMap.unmodifiableMap(aMap);
 	}
 	
-	public static int generateRandomStat() {
+	private static int generateRandomStat() {
 		int total = 0;
 		for (int i = 0; i < 1000000; i++)
 		{
@@ -62,4 +62,4 @@ public class RocketPokemonFactory implements IPokemonFactory {
 
 
 // problème de style -> correction dans le code
-// generateRandomStat() est privée, donc on ne peut pas la test -> modifier en public
+//problem d'accès pour les test
