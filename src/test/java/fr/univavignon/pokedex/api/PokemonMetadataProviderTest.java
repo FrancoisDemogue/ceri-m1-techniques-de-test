@@ -66,6 +66,6 @@ public class PokemonMetadataProviderTest {
         // On vérifie que l'exception est bien lancée
         PokedexException exception = assertThrows(PokedexException.class, provider::loadMetadataFromFile);
         assertEquals("Error reading metadata file", exception.getMessage());
-}
+    }
 
 }
